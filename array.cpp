@@ -185,12 +185,101 @@ class Array{
         i = i +j+1;
        }
    }
+   int sellbuyStacksNative(int arr[], int n){
+       int buy =0 ;
+       int profit = 0; 
+       while(buy < n){
+           int sell = buy +1;
+           int diff =0;
+           while( sell < n && arr[sell] > arr[sell-1])
+               {
+                 
+          diff = arr[sell]- arr[buy];
+          sell ++;
+         
+               }
+            profit += diff ;
+            buy = sell;
+       }
+       return profit;
+   }
+   int sellbuyStackEfficient(int arr[], int n){
+       int profit =0;
+       for(int i =1; i< n;i++){
+           if(arr[i]>arr[i-1])
+           profit+= arr[i]-arr[i-1];
+       }
+       return profit;
+   }
+   
+   int getWater(int arr[], int n){
+       int res =0;
+       int lmax[n], rmax[n];
+       lmax[0] = arr[0];
+       for(int i =1 ; i< n ; i++){
+           lmax[i] = max(arr[i], lmax[i-1]);
+       }
+       rmax[n-1] = arr[n-1];
+       for(int i = n-2 ; i>=0 ; i--){
+           rmax[i] = max(arr[i],rmax[i+1]);
+       }
+       for(int i =0; i<n ; i++){
+           res += min(lmax[i],rmax[i])-arr[i];
+       }
+       return res;
+   }
+   
+   int calConsecutive1s(int arr[], int n){
+       int maxCo = 0;
+       int count =0;
+       for(int i =0; i< n ;i++){
+          
+           if(arr[i]==0){
+               count = 0;
+           }
+           else{
+               count++;
+               maxCo = max(count, maxCo);
+           }
+           
+       }
+       return maxCo;
+   }
+   int maxSubarrSum(int arr[], int n ){
+       int maxSum =0;
+       int sum =0;
+       int count =0;
+       for(int i =0; i< n ; i++){
+           sum += arr[i];
+           if(sum < 0){
+               sum =0;
+               count ++;
+           }
+           maxSum = max(sum,maxSum);
+       }
+       
+       if(count == n){
+           int minVal =arr[0];
+           
+           for(int i =1; i<n ; i++){
+               minVal = max(minVal,arr[i]);
+           }
+           
+        return minVal;
+       }
+       return maxSum;
+   }
+   
+   int maxSubarrSumEfficient(int arr[], int n){
+       
+   }
+  
 };
 
 int main()
 {
     Array a;
-    int arr[] = {0,2,10,4,8,5};
+    int arr[] = {-2,-3,-8,-7,-1,-2,-3};
     
    /* a.deleteFun(arr,6,3);
     printArr(arr,6);
@@ -223,7 +312,17 @@ int main()
     a.leaderNative(arr,6);
     
     cout << a.maxDiff(arr,6);
-    */
+    
     a.feq(arr,6);
+    
+    cout << a.sellbuyStacksNative(arr,6);
+      
+    cout << a.sellbuyStackEfficient(arr,6);
+    
+    cout << a.getWater(arr,5);
+    
+    cout << a.calConsecutive1s(arr,5);
+    */
+    cout << a.maxSubarrSum(arr,7);
     return 0;
 }
