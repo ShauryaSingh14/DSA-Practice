@@ -377,82 +377,101 @@ public:
         }
         return maxCount;
     }
-    int maxCircularSubArr(int arr[], int n){
+    int maxCircularSubArr(int arr[], int n)
+    {
         int minSum = arr[0];
         int sum = arr[0];
         int totalSum = arr[0];
-        for(int i =1;  i<n ; i++){
-            totalSum +=arr[i];
-            sum = min(sum+arr[i], arr[i]);
+        for (int i = 1; i < n; i++)
+        {
+            totalSum += arr[i];
+            sum = min(sum + arr[i], arr[i]);
             minSum = min(sum, minSum);
         }
-        return totalSum-minSum;
+        return totalSum - minSum;
     }
-    int majorityElement(int arr[], int n){
+    int majorityElement(int arr[], int n)
+    {
         int count;
-        for(int i =0; i< n ; i++){
-            count = 1; 
-            for(int j =0 ; j< n ;j++){
-                if(arr[i]==arr[j])
-                    count ++;
+        for (int i = 0; i < n; i++)
+        {
+            count = 1;
+            for (int j = 0; j < n; j++)
+            {
+                if (arr[i] == arr[j])
+                    count++;
             }
-            if(count > n/2 )
+            if (count > n / 2)
                 return i;
         }
         return -1;
     }
-    int majElEfficient(int arr[], int n){
-        int res =0, count = 1;
-        for(int i =0 ; i< n ;i++){
-         if(arr[i]==arr[res])
-         count++;
-         else
-         count--;
-         if(count == 0){
-             res = i ; count =1;
-         }
-            
+    int majElEfficient(int arr[], int n)
+    {
+        int res = 0, count = 1;
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] == arr[res])
+                count++;
+            else
+                count--;
+            if (count == 0)
+            {
+                res = i;
+                count = 1;
+            }
         }
         count = 0;
-        for(int i = 0 ; i<n ; i++){
-            if(arr[res]==arr[i])
-            count ++;
-         }
-         if(count <= n/2)
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[res] == arr[i])
+                count++;
+        }
+        if (count <= n / 2)
             return -1;
-            
+
         return res;
-        
     }
-    void minFilps(int arr[], int n){
-        for(int i =1 ; i<n ;i++){
-           if(arr[i]!=arr[i-1]){
-               if(arr[i]!=arr[0]){
-                   cout << "from " << i << " to " ; 
-               }
-               else{
-                   cout << i-1 << endl;
-               }
-           } 
+    void minFilps(int arr[], int n)
+    {
+        for (int i = 1; i < n; i++)
+        {
+            if (arr[i] != arr[i - 1])
+            {
+                if (arr[i] != arr[0])
+                {
+                    cout << "from " << i << " to ";
+                }
+                else
+                {
+                    cout << i - 1 << endl;
+                }
+            }
         }
-        if(arr[n-1]!=arr[0]){
-            cout << n-1 << endl;
+        if (arr[n - 1] != arr[0])
+        {
+            cout << n - 1 << endl;
         }
     }
-    int windowSliding(int arr[], int n){
-        int maxSum = arr[0];
-        int sum = arr[0];
-        for(int i = 0 ; i< n ; i++){
-            sum += arr[i];
-            if(arr[])
+    int windowSliding(int arr[], int n, int k)
+    {
+        int currSum = 0;
+        for (int i = 0; i < k; i++)
+        {   currSum += arr[i];
         }
+        int maxSum = currSum;
+        for(int i =k ; i< n ; i++){
+            currSum += arr[i] - arr[i-k];
+            maxSum = max(currSum, maxSum);
+        }
+        return maxSum;
     }
 };
 
 int main()
 {
     Array a;
-    int arr[] = {1,1,0,0,0,1,0};
+    int arr[] = {5,-10,6,90,3};
 
     /* a.deleteFun(arr,6,3);
      printArr(arr,6);
@@ -497,13 +516,15 @@ int main()
      cout << a.calConsecutive1s(arr,5);
 
      cout << a.maxSubarrSum(arr,7);
-      
+
    cout << a.maxLenOddEven(arr, 6);
-    
+
     cout << a.maxCircularSubArr(arr,5);
-    
+
     cout << a.majElEfficient(arr,6);
+    
+    a.minFilps(arr, 7);
     */
-    a.minFilps(arr,7);
+    cout << a.windowSliding(arr,5,2);
     return 0;
 }
