@@ -148,6 +148,20 @@ class Sorting{
             ptr2++;
             }
         }
+        cout << endl;
+    }
+    int totalInversions(vector <int> vec){
+        int ptr1 =0 ;
+        int ptr2 =1;
+        int count =0;
+        while(ptr1 < vec.size() && ptr2 < vec.size()){
+            if(vec[ptr1]>vec[ptr2] && ptr1 < ptr2){
+                count ++;
+            }
+                ptr1 ++; 
+                ptr2 ++;
+        }
+        return count ;
     }
 };
 
@@ -170,5 +184,7 @@ int main(){
     
     //s.intersectionOfSortedArr(v1,v2);
     s.unionOfSortedArr(v1,v2);
+    vector <int> inv={2,4,1,3,5};
+    cout << s.totalInversions(inv);
     return 0;
 }
