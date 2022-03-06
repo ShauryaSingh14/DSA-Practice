@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <climits>
+#include <vector>
 using namespace std;
 void printArr(int arr[], int n)
 {
@@ -466,7 +467,39 @@ public:
         }
         return maxSum;
     }
+    vector <int> merge(vector <int> arr1, vector <int> arr2){
+        int ptr1 = 0;
+        int ptr2 = 0;
+        vector <int> temp;
+        while( ptr1 < arr1.size() && ptr2 < arr2.size()){
+            if(arr1[ptr1]<=arr2[ptr2]){
+               temp.push_back(arr1[ptr1]);
+               ptr1++;
+            }
+            else {
+                temp.push_back(arr2[ptr2]);
+                ptr2++;
+            }
+        }
+        while(ptr1 != arr1.size()){
+            temp.push_back(arr1[ptr1]);
+            ptr1++;
+        }
+        while(ptr2 != arr2.size()){
+                temp.push_back(arr2[ptr2]);
+                ptr2++;
+        }
+        return temp;
+    }
 };
+void printVec(vector <int> &v )
+{
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << ", ";
+    }
+    cout << endl;
+}
 
 int main()
 {
@@ -525,6 +558,10 @@ int main()
     
     a.minFilps(arr, 7);
     */
-    cout << a.windowSliding(arr,5,2);
+    cout << a.windowSliding(arr,5,2) << endl;
+    vector <int> v1 ={0,4,7};
+    vector <int> v2 ={2,3,6,8,9};
+    vector <int> temp = a.merge(v1,v2);
+    printVec(temp);
     return 0;
 }
