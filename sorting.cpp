@@ -163,6 +163,25 @@ class Sorting{
         }
         return count ;
     }
+    int partition(vector <int> &arr,int p ,int r){
+        int x = arr[r];
+        int i = p-1;
+        for(int j =p; j< r ;j++){
+            if(arr[j]<x){
+                i++;
+                swap(arr[i],arr[j]);
+            }
+        }
+        swap(arr[i+1],arr[r]);
+        return (i+1);
+    }
+    void quickSort(vector <int> &arr, int p, int r){
+        if(r>p){
+            int q = partition(arr,p,r);
+            quickSort(arr,p,q-1);
+            quickSort(arr,q+1,r);
+        }
+    }
 };
 
 int main(){
@@ -178,13 +197,16 @@ int main(){
     // s.mergeFun(vec,0,2,4);
     // printVec(vec);
     
-    s.mergeSort(v1,0,4);
+    //s.mergeSort(v1,0,4);
+   
+    s.quickSort(v1,0,4);
     printVec(v1);
-    printVec(v2);
+    //printVec(v2);
     
     //s.intersectionOfSortedArr(v1,v2);
-    s.unionOfSortedArr(v1,v2);
-    vector <int> inv={2,4,1,3,5};
-    cout << s.totalInversions(inv);
+    // s.unionOfSortedArr(v1,v2);
+    // vector <int> inv={2,4,1,3,5};
+    //cout << s.totalInversions(inv);
+
     return 0;
 }
